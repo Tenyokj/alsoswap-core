@@ -24,12 +24,17 @@ jobs:
           node-version: '22'
           cache: npm
 
+      - name: Print tool versions
+        run: |
+          node -v
+          npm -v
+
       - name: Install dependencies
         run: |
           if [ -f package-lock.json ]; then
             npm ci
           else
-            npm install
+            npm install --no-audit --no-fund --legacy-peer-deps
           fi
 
       - name: Compile contracts
